@@ -1,16 +1,19 @@
 spring:
   application:
     name: emailSender
-mail:
-  host: smtp.gmail.com
-  port: 587
-  username: saravanandurai938@gmail.com
-  password: kfhu kroj zdfl krki
 
-properties:
   mail:
-    smtp:
-     auth: true
-     starttls:
-       enable: true
-    
+    host: smtp.gmail.com
+    port: 587
+    username: saravanandurai938@gmail.com
+    password: kfhu kroj zdfl krki
+
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: ${PORT:8080}

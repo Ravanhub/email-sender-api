@@ -2,6 +2,7 @@ package com.example.emailSender.service;
 
 import com.example.emailSender.dto.ContactRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -12,25 +13,23 @@ public class EmailService {
 
     private JavaMailSender mailSender;
 
+    @Value("${spring.mail.username}")
+    private String receiverEmail;
+
     public void send(ContactRequest request) {
 
-        SimpleMailMessage mail =
-                new SimpleMailMessage();
+        SimpleMailMessage message = new SimpleMailMessage();
 
-        mail.setTo("saravanandurai938@gmail.com");
+        message.setTo(receiverEmail);
+        message.setSubject("Portfolio Contact: " + request.getSubject());
 
-        mail.setSubject(
-                "Portfolio Contact : "
-                        + request.subject()
+        message.setText(
+                "Name: " + request.getName() + "\n" +
+                "Email: " + request.getEmail() + "\n\n" +
+                "Message:\n" +
+                request.getMessage()
         );
 
-        mail.setText(
-                "Name : " + request.name()
-                        + "\nEmail : " + request.email()
-                        + "\n\nMessage:\n"
-                        + request.message()
-        );
-
-        mailSender.send(mail);
+        mailSender.send(message);
     }
 }

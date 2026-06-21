@@ -12,13 +12,14 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/contact")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class ContactController {
 
-    private EmailService emailService;
+    private  EmailService emailService;
 
     @GetMapping("/test")
-    public String test() {
-        return "API Working";
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("API Working");
     }
 
     @PostMapping
@@ -30,7 +31,7 @@ public class ContactController {
         return ResponseEntity.ok(
                 Map.of(
                         "success", true,
-                        "message", "Email sent"
+                        "message", "Email sent successfully"
                 )
         );
     }
