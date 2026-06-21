@@ -14,13 +14,16 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ContactController {
 
-    private  EmailService emailService;
+    private EmailService emailService;
+
+    @GetMapping("/test")
+    public String test() {
+        return "API Working";
+    }
 
     @PostMapping
     public ResponseEntity<?> sendEmail(
-            @Valid
-            @RequestBody ContactRequest request
-    ) {
+            @Valid @RequestBody ContactRequest request) {
 
         emailService.send(request);
 
