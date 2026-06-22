@@ -5,17 +5,17 @@ import jakarta.validation.constraints.NotBlank;
 
 public class ContactRequest {
 
-    @NotBlank(message = "Name is required")
+    @NotBlank
     private String name;
 
-    @Email(message = "Invalid email")
-    @NotBlank(message = "Email is required")
+    @Email
+    @NotBlank
     private String email;
 
-    @NotBlank(message = "Subject is required")
+    @NotBlank
     private String subject;
 
-    @NotBlank(message = "Message is required")
+    @NotBlank
     private String message;
 
     public String getName() {

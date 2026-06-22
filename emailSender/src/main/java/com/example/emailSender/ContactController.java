@@ -13,9 +13,11 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class ContactController {
 
-    private EmailService emailService;
+    private final EmailService emailService;
 
-    public ContactController(EmailService emailService) {
+    public ContactController(
+            EmailService emailService
+    ) {
         this.emailService = emailService;
     }
 
@@ -26,14 +28,16 @@ public class ContactController {
 
     @PostMapping
     public ResponseEntity<?> sendEmail(
-            @Valid @RequestBody ContactRequest request) {
+            @Valid @RequestBody ContactRequest request
+    ) throws Exception {
 
         emailService.send(request);
 
         return ResponseEntity.ok(
                 Map.of(
                         "success", true,
-                        "message", "Email sent successfully"
+                        "message",
+                        "Email sent successfully"
                 )
         );
     }
