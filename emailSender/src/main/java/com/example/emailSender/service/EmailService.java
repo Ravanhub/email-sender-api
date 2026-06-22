@@ -8,13 +8,16 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class EmailService {
 
     private JavaMailSender mailSender;
 
     @Value("${spring.mail.username}")
     private String receiverEmail;
+
+    public EmailService(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
 
     public void send(ContactRequest request) {
 
